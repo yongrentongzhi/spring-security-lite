@@ -2,9 +2,20 @@
 package org.springframework.security.authentication.imp;
 
 
-import org.springframework.security.authentication.Authentication;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.imp.authenticationToken.AbstractAuthenticationToken;
+import org.springframework.security.core.SpringSecurityMessageSource;
+import org.springframework.security.exception.AccountStatusException;
+import org.springframework.security.exception.AuthenticationException;
+import org.springframework.security.exception.InternalAuthenticationServiceException;
+import org.springframework.security.exception.ProviderNotFoundException;
+import org.springframework.util.Assert;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +26,7 @@ import java.util.List;
  */
 public class ProviderManager implements AuthenticationManager, MessageSourceAware,
 		InitializingBean {
-
+	private static final Log logger = LogFactory.getLog(ProviderManager.class);
 	// ~ Instance fields
 	// ================================================================================================
 
@@ -60,6 +71,7 @@ public class ProviderManager implements AuthenticationManager, MessageSourceAwar
 	// ~ Methods
 	// ========================================================================================================
 
+	@Override
 	public void afterPropertiesSet() {
 		checkState();
 	}
@@ -100,6 +112,7 @@ public class ProviderManager implements AuthenticationManager, MessageSourceAwar
 	 *
 	 * @throws AuthenticationException if authentication fails.
 	 */
+	@Override
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
 		Class<? extends Authentication> toTest = authentication.getClass();
@@ -211,6 +224,7 @@ public class ProviderManager implements AuthenticationManager, MessageSourceAwar
 		return providers;
 	}
 
+	@Override
 	public void setMessageSource(MessageSource messageSource) {
 		this.messages = new MessageSourceAccessor(messageSource);
 	}
@@ -239,10 +253,12 @@ public class ProviderManager implements AuthenticationManager, MessageSourceAwar
 	}
 
 	private static final class NullEventPublisher implements AuthenticationEventPublisher {
+		@Override
 		public void publishAuthenticationFailure(AuthenticationException exception,
-				Authentication authentication) {
+												 Authentication authentication) {
 		}
 
+		@Override
 		public void publishAuthenticationSuccess(Authentication authentication) {
 		}
 	}

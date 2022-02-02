@@ -17,31 +17,32 @@
 package org.springframework.security.exception;
 
 /**
- * object does not hold a required authority.
+ * Thrown if an authentication request is rejected because the credentials are invalid.
+ * For this exception to be thrown, it means the account is neither locked nor disabled.
  *
  * @author Ben Alex
  */
-public class AccessDeniedException extends RuntimeException {
+public class BadCredentialsException extends AuthenticationException {
 	// ~ Constructors
 	// ===================================================================================================
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message.
+	 * Constructs a <code>BadCredentialsException</code> with the specified message.
 	 *
 	 * @param msg the detail message
 	 */
-	public AccessDeniedException(String msg) {
+	public BadCredentialsException(String msg) {
 		super(msg);
 	}
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message and
+	 * Constructs a <code>BadCredentialsException</code> with the specified message and
 	 * root cause.
 	 *
 	 * @param msg the detail message
 	 * @param t root cause
 	 */
-	public AccessDeniedException(String msg, Throwable t) {
+	public BadCredentialsException(String msg, Throwable t) {
 		super(msg, t);
 	}
 }

@@ -17,31 +17,32 @@
 package org.springframework.security.exception;
 
 /**
- * object does not hold a required authority.
+ * Thrown if an authentication request is rejected because the account is disabled. Makes
+ * no assertion as to whether or not the credentials were valid.
  *
  * @author Ben Alex
  */
-public class AccessDeniedException extends RuntimeException {
+public class DisabledException extends AccountStatusException {
 	// ~ Constructors
 	// ===================================================================================================
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message.
+	 * Constructs a <code>DisabledException</code> with the specified message.
 	 *
 	 * @param msg the detail message
 	 */
-	public AccessDeniedException(String msg) {
+	public DisabledException(String msg) {
 		super(msg);
 	}
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message and
-	 * root cause.
+	 * Constructs a <code>DisabledException</code> with the specified message and root
+	 * cause.
 	 *
 	 * @param msg the detail message
 	 * @param t root cause
 	 */
-	public AccessDeniedException(String msg, Throwable t) {
+	public DisabledException(String msg, Throwable t) {
 		super(msg, t);
 	}
 }

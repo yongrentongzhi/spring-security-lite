@@ -17,31 +17,36 @@
 package org.springframework.security.exception;
 
 /**
- * object does not hold a required authority.
+ * Thrown if an authentication request could not be processed due to a system problem.
+ * <p>
+ * This might be thrown if a backend authentication repository is unavailable, for
+ * example.
  *
  * @author Ben Alex
+ * @see InternalAuthenticationServiceException
  */
-public class AccessDeniedException extends RuntimeException {
+public class AuthenticationServiceException extends AuthenticationException {
 	// ~ Constructors
 	// ===================================================================================================
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message.
+	 * Constructs an <code>AuthenticationServiceException</code> with the specified
+	 * message.
 	 *
 	 * @param msg the detail message
 	 */
-	public AccessDeniedException(String msg) {
+	public AuthenticationServiceException(String msg) {
 		super(msg);
 	}
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message and
-	 * root cause.
+	 * Constructs an <code>AuthenticationServiceException</code> with the specified
+	 * message and root cause.
 	 *
 	 * @param msg the detail message
 	 * @param t root cause
 	 */
-	public AccessDeniedException(String msg, Throwable t) {
+	public AuthenticationServiceException(String msg, Throwable t) {
 		super(msg, t);
 	}
 }

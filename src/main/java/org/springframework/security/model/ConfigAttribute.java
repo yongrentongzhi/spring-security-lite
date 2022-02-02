@@ -1,7 +1,6 @@
 
 package org.springframework.security.model;
 
-import org.springframework.security.access.intercept.RunAsManager;
 
 import java.io.Serializable;
 

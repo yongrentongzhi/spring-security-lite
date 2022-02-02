@@ -16,32 +16,25 @@
 
 package org.springframework.security.exception;
 
+import org.springframework.security.authentication.AuthenticationProvider;
+
 /**
- * object does not hold a required authority.
+ * Thrown by {@link ProviderManager} if no {@link AuthenticationProvider} could be found
+ * that supports the presented {@link org.springframework.security.core.Authentication}
+ * object.
  *
  * @author Ben Alex
  */
-public class AccessDeniedException extends RuntimeException {
+public class ProviderNotFoundException extends AuthenticationException {
 	// ~ Constructors
 	// ===================================================================================================
 
 	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message.
+	 * Constructs a <code>ProviderNotFoundException</code> with the specified message.
 	 *
 	 * @param msg the detail message
 	 */
-	public AccessDeniedException(String msg) {
+	public ProviderNotFoundException(String msg) {
 		super(msg);
-	}
-
-	/**
-	 * Constructs an <code>AccessDeniedException</code> with the specified message and
-	 * root cause.
-	 *
-	 * @param msg the detail message
-	 * @param t root cause
-	 */
-	public AccessDeniedException(String msg, Throwable t) {
-		super(msg, t);
 	}
 }
